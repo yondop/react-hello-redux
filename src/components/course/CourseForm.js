@@ -1,18 +1,17 @@
 import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
-import toastr from 'toastr';
 
 const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
   return (
     <form>
-      <h1>Manage course</h1>
+      <h1>Manage Course</h1>
       <TextInput
         name="title"
         label="title"
         value={course.title}
         onChange={onChange}
-        errors={errors.title} />
+        error={errors.title} />
 
       <SelectInput
         name="authorId"
@@ -21,23 +20,23 @@ const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
         defaultOption="Select author"
         options={allAuthors}
         onChange={onChange}
-        errors={errors.authorId} />
+        error={errors.authorId} />
       <TextInput
         name="category"
         label="category"
         value={course.category}
         onChange={onChange}
-        errors={errors.category} />
+        error={errors.category} />
       <TextInput
         name="length"
         label="length"
         value={course.length}
         onChange={onChange}
-        errors={errors.length} />
+        error={errors.length} />
       <input
         type="submit"
         disabled={saving}
-        value={saving ? 'Saving...' : 'Saved'}
+        value={saving ? 'Saving...' : 'Save'}
         className="btn btn-primary"
         onClick={onSave} />
     </form>
