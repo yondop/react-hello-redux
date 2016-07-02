@@ -1,5 +1,7 @@
 import React, {PropTypes}  from 'react';
 import CourseListRow from './CourseListRow';
+import {connect} from 'react-redux';
+
 
 const CourseList = ({courses}) => {
   return (
@@ -15,11 +17,6 @@ const CourseList = ({courses}) => {
       </thead>
       <tbody>
         {courses
-          .sort((a, b) => {
-            if (a.id > b.id) return 1;
-            if (a.id < b.id) return -1;
-            return 0;
-          })
           .map(course =>
           <CourseListRow key={course.id} course={course} />
         )}
@@ -32,4 +29,16 @@ CourseList.propTypes = {
   courses: PropTypes.array.isRequired
 };
 
-export default CourseList;
+function mapStateToProps(state) {
+   let courses = state.courses.slice(0);
+   courses.sort((a, b) => {
+     if (a.id > b.id) return 1;
+     if (a.id < b.id) return -1;
+     return 0;
+   });
+   return {
+     courses: courses
+   };
+}
+
+export default connect(mapStateToProps)(CourseList);
